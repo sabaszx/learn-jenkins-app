@@ -30,6 +30,6 @@ jobs:
 
     - name: Prepare
       run: |
-        echo "TEST RUN COMMAND"
-        hostnamectl
-        docker --version
+        npm install
+        npm run build
+        pm2 start npm --name "learn-jenkins-app" -- start
