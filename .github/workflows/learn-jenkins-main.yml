@@ -1,0 +1,35 @@
+name: learn-jenkins-main
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build
+    permissions:
+      id-token: write
+      contents: write
+    runs-on: achrolite
+    #env:
+    # ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY_ID }}
+    #SECRET_ACCESS_KEY: ${{ secrets.SECRET_ACCESS_KEY }}
+    steps:     
+    - name: Check out code
+      uses: actions/checkout@v3
+      with:
+         persist-credentials: false
+         fetch-depth: 0
+
+    - name: Prepare
+      run: |
+        echo "TEST RUN COMMAND"
+        hostnamectl
+        docker --version
